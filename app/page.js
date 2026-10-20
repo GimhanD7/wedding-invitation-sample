@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import HeroSection from '@/components/HeroSection';
+import GuestWelcomeSection from '@/components/GuestWelcomeSection';
 import CountdownSection from '@/components/CountdownSection';
 import OurStorySection from '@/components/OurStorySection';
 import CelebrateWithUsSection from '@/components/CelebrateWithUsSection';
@@ -11,22 +12,42 @@ import RsvpSection from '@/components/RsvpSection';
 import GuestbookSection from '@/components/GuestbookSection';
 import FooterSection from '@/components/FooterSection';
 import AudioPlayer from '@/components/AudioPlayer';
+import OpeningVideoModal from '@/components/OpeningVideoModal';
 
 export default function WeddingInvitationPage() {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [showRsvpModal, setShowRsvpModal] = useState(false);
+  const [manualVideoOpen, setManualVideoOpen] = useState(false);
 
   const toggleAudio = () => {
     setIsAudioPlaying(!isAudioPlaying);
   };
 
+  const handleOpenFromVideo = () => {
+    setIsAudioPlaying(true);
+    setManualVideoOpen(false);
+  };
+
   return (
     <main className="wedding-app-wrapper">
+      {/* Opening Video on Mobile Arrival (Couple Waiting) */}
+      <OpeningVideoModal onOpenInvitation={handleOpenFromVideo} />
+
+      {/* Manual Opening Video Modal if Re-triggered */}
+      {manualVideoOpen && (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 99999 }}>
+          <OpeningVideoModal onOpenInvitation={handleOpenFromVideo} />
+        </div>
+      )}
+
       {/* Outer Card Gold Frame */}
       <div className="card-outer-border">
         <div className="card-inner-border">
           {/* Section 1: Hero Invitation Card */}
-          <HeroSection />
+          <HeroSection onWatchVideo={() => setManualVideoOpen(true)} />
+
+          {/* Section 1.5: Guest Welcome & Personalized Invitation Card */}
+          <GuestWelcomeSection />
 
           {/* Section 2: Countdown Timer */}
           <CountdownSection />

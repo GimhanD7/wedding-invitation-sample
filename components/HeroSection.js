@@ -1,6 +1,6 @@
 'use client';
 
-export default function HeroSection() {
+export default function HeroSection({ onWatchVideo }) {
   return (
     <section id="hero" className="traditional-lattice-bg" style={{ padding: '24px 16px 14px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
       {/* Top Diamond Ornament matching Screenshot 1 */}
@@ -104,8 +104,38 @@ export default function HeroSection() {
         </div>
       </div>
 
+      {/* Watch opening video button option */}
+      {onWatchVideo && (
+        <div style={{ marginTop: '12px' }}>
+          <button
+            type="button"
+            onClick={onWatchVideo}
+            style={{
+              background: 'rgba(255, 255, 255, 0.85)',
+              border: '1px solid rgba(198, 148, 70, 0.5)',
+              color: 'var(--color-gold-dark)',
+              padding: '7px 18px',
+              borderRadius: '25px',
+              fontSize: '0.8rem',
+              fontFamily: 'var(--font-serif-royal)',
+              letterSpacing: '1px',
+              textTransform: 'uppercase',
+              fontWeight: 700,
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              boxShadow: '0 3px 12px rgba(36, 23, 15, 0.08)',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            <span>▶ Watch Welcome Video</span>
+          </button>
+        </div>
+      )}
+
       {/* Scroll Down Prompt */}
-      <div className="scroll-cue" style={{ marginTop: '10px' }}>
+      <div className="scroll-cue" style={{ marginTop: '12px' }}>
         <span>S C R O L L</span>
         <div className="scroll-cue-arrow"></div>
       </div>
